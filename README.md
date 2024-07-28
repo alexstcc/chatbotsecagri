@@ -1,8 +1,6 @@
-![](https://img.shields.io/github/license/alura-cursos/android-com-kotlin-personalizando-ui)
+# Secretaria de Agricultura
 
-# Jornada Viagens
-
-Chatbot do Jornada Viagens, um app de simulação de um site de venda de pacotes de viagens, passagens aéreas, hospedagem etc.
+Chatbot da Secretaria de Agricultura, um app de troca de mensagens entre orgão públicos e população.
 
 ## 🔨 Objetivos do projeto
 
