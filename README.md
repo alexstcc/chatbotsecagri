@@ -1,6 +1,3 @@
-![Programação-IA para Programação (1)](https://github.com/jacqueline-oliveira/3752-gemini-com-node/assets/66698429/ff93b020-9606-4419-a251-d8b5904f6195)
-
-
 ![](https://img.shields.io/github/license/alura-cursos/android-com-kotlin-personalizando-ui)
 
 # Jornada Viagens
