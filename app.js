@@ -15,7 +15,7 @@ app.use('/static', express.static(join(__dirname, 'static'), { extensions: ['css
 
 app.get('/', (req, res) => {
   inicializaChat();
-  res.sendFile(join(__dirname, 'templates', 'chat.html'));
+  res.sendFile(join(__dirname, 'index.html'));
 });
 
 app.post('/chat', async (req, res) => {
