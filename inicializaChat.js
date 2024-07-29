@@ -23,7 +23,7 @@ function inicializaChat() {
             },
         ],
         generationConfig: {
-          maxOutputTokens: 1000,
+          maxOutputTokens: 1000
         },
     });
 }
