@@ -25,7 +25,7 @@ async function enviarMensagem() {
         const response = await fetch('https://chatbotsecagri.vercel.app/chat', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({'mensagem': mensagem})
         });
