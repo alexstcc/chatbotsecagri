@@ -8,7 +8,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const app = express();
-const port = process.env.url('https://chatbotsecagri.vercel.app/');
+const port = process.env.url('https://chatbotsecagri.vercel.app/chat');
 
 app.use(express.json());
 app.use('/static', express.static(join(__dirname, 'static'), { extensions: ['css', 'svg', 'js'] }));
