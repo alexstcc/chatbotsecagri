@@ -20,9 +20,11 @@ async function enviarMensagem() {
 
     const mensagem = input.value;
     input.value = '';
+
+    
     
     try {
-        const response = await fetch('https://chatbotsecagri.vercel.app/chat', {
+        const response = await fetch('https://chatbotsecagri.vercel.app//chat', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -40,7 +42,7 @@ async function enviarMensagem() {
 
         const resposta = await response.json();
         novaBolhaBot.innerHTML = resposta.response;
-        vaiParaFinalDoChat();    
+        vaiParaFinalDoChat();       
 
     } catch (error) {
         alert(error);
