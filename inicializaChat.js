@@ -2,7 +2,7 @@ import dotenv, { parse } from 'dotenv';
        dotenv.config();
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY); //('AIzaSyDloHGRP5hndljL4IgM8V4BFp49eu4bqI0');
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 const funcoes = {
   taxaJurosDeLicenca: ({ value }) => {

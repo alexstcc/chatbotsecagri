@@ -20,10 +20,9 @@ async function enviarMensagem() {
 
     const mensagem = input.value;
     input.value = '';
-    const VERCEL_URL = 'https://chatbotsecagri.vercel.app/chat';
-
+    
     try {
-        const response = await fetch(VERCEL_URL, {
+        const response = await fetch('https://chatbotsecagri.vercel.app/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
