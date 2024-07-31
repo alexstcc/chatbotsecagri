@@ -20,6 +20,7 @@ async function enviarMensagem() {
 
     const mensagem = input.value;
     input.value = '';
+    const VERCEL_URL = 'https://chatbotsecagri.vercel.app/chat';
 
     try {
         const response = await fetch(VERCEL_URL, {
