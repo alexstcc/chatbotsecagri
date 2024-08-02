@@ -22,7 +22,7 @@ async function enviarMensagem() {
     input.value = '';
 
     try {
-        const response = await fetch('https://chatbotsecagri.vercel.app/app.js', {
+        const response = await fetch('https://chatbotsecagri.vercel.app/chat', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
