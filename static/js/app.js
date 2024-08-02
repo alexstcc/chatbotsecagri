@@ -1,71 +1,44 @@
-const chat = document.querySelector('#chat');
-const input = document.querySelector('#input');
-const botaoEnviar = document.querySelector('#botao-enviar');
-const botaoLimpar = document.querySelector('#botao-limpar-conversa');
+import express from 'express';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+import { executaChat } from './chat.js';
+import { inicializaChat } from './inicializaChat.js';
+import bodyParser from 'express';
 
-botaoEnviar.addEventListener('click', enviarMensagem);
-botaoLimpar.addEventListener('click', limparConversa)
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
-input.addEventListener('keyup', function(event) {
-    event.preventDefault();
-    if (event.keyCode === 13) {
-        botaoEnviar.click();
-    }
+const app = express();
+app.use(express.json());
+app.use('/static', express.static(join(__dirname, 'static'), { extensions: ['css', 'svg', 'js'] }));
+const port = process.env.PORT || 3000;
+
+const urlencodedParser = bodyParser.urlencoded({ extended: false });
+
+app.use('/static', express.static(join(__dirname, 'static'), { extensions: ['css', 'svg', 'js'] }));
+
+app.get('/', (req, res) => {
+  inicializaChat();
+  res.sendFile(join(__dirname, 'index.html'));
 });
 
-document.addEventListener('DOMContentLoaded', vaiParaFinalDoChat);
+app.post('/chat', urlencodedParser, async (req, res) => {
+  try {
+    const mensagem = req.body?.mensagem;
+    console.log('Mensagem do usuário', mensagem)
 
-async function enviarMensagem() {
-    if(input.value == '' || input.value == null) return;
-
-    const mensagem = input.value;
-    input.value = '';
-
-    try {
-        const response = await fetch('https://chatbotsecagri.vercel.app/chat', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({'mensagem': mensagem}),
-        }); 
-
-        const novaBolha = criaBolhaUsuario();
-        novaBolha.innerHTML = mensagem;
-        chat.appendChild(novaBolha);
-
-        let novaBolhaBot = criaBolhaBot();
-        chat.appendChild(novaBolhaBot);
-        vaiParaFinalDoChat();
-
-        const resposta = await response.json();
-        novaBolhaBot.innerHTML = resposta.response;
-        vaiParaFinalDoChat();       
-
-    } catch (error) {
-        alert(error);
+    if (!mensagem) {
+      return res.status(400).json({ error: 'Erro no corpo da requisição' });
     }
+    const response = await executaChat(mensagem);
+    res.json({ response });
 
-    
-}
+  } catch (error) {
+    console.error('Error no endpoint do chat:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
-function criaBolhaUsuario() {
-    const bolha = document.createElement('p');
-    bolha.classList = 'chat__bolha chat__bolha--usuario';
-    return bolha;
-}
-
-function criaBolhaBot() {
-    let bolha = document.createElement('p');
-    bolha.classList = 'chat__bolha chat__bolha--bot';
-    bolha.innerHTML = '<div class="loader"></div>'
-    return bolha;
-}
-
-function vaiParaFinalDoChat() {
-    chat.scrollTop = chat.scrollHeight;
-}
-
-function limparConversa() {
-    location.reload();
-}
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
+});
