@@ -22,12 +22,12 @@ async function enviarMensagem() {
     input.value = '';
 
     try {
-        const response = await fetch('https://localhost:3000/chat', {
+        const response = await fetch('https://chatbotsecagri.vercel.app/chat', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({'mensagem': mensagem})
+            body: JSON.stringify({'mensagem': mensagem}),
         }); 
 
         const novaBolha = criaBolhaUsuario();
